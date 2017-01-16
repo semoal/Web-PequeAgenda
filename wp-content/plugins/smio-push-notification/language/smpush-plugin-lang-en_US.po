@@ -1,0 +1,1452 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Smart Push Notification Plugin\n"
+"Last-Translator: last updated for version 5.91\n"
+"Language: en-US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+# version 5.1 translations
+msgid "Authentication failed: Authentication key is required to proceed" 
+msgstr ""
+
+msgid "You called unavailable method" 
+msgstr ""
+
+msgid "Message sent successfully" 
+msgstr ""
+
+msgid "Did not find data about this user or the user is inactive" 
+msgstr ""
+
+msgid "Wrong device type value. System supports the following device types" 
+msgstr ""
+
+msgid "Token saved successfully" 
+msgstr ""
+
+msgid "Push database connection error" 
+msgstr ""
+
+msgid "Token subscription deleted successfully" 
+msgstr ""
+
+msgid "Subscription saved successfully" 
+msgstr ""
+
+msgid "Success" 
+msgstr ""
+
+msgid "No result found" 
+msgstr ""
+
+msgid "Push notification system is active now and work under version" 
+msgstr ""
+
+msgid "your system has been successfully upgraded to the latest version" 
+msgstr ""
+
+msgid "Something happens while downloading the update package...Please try again later" 
+msgstr ""
+
+msgid "System current version" 
+msgstr ""
+
+msgid "System last version" 
+msgstr ""
+
+msgid "System last version : failed to connect</p>" 
+msgstr ""
+
+msgid "Save Changes" 
+msgstr ""
+
+msgid "For how to get your private purchase code" 
+msgstr ""
+
+msgid "click here" 
+msgstr ""
+
+msgid "Start System Update" 
+msgstr ""
+
+msgid "Invalid BlackBerry authentication settings" 
+msgstr ""
+
+msgid "BlackBerry push notification server not responding" 
+msgstr ""
+
+msgid "System can not connect with BlackBerry server and returns unkown error" 
+msgstr ""
+
+msgid "System can not connect with BlackBerry server and returns error" 
+msgstr ""
+
+msgid "Connecting with the remote push notification database is failed" 
+msgstr ""
+
+msgid "can not create a directory to save the certifications files under uploads directory ." 
+msgstr ""
+
+msgid "Push Notification" 
+msgstr ""
+
+msgid "Send Push Notification" 
+msgstr ""
+
+msgid "Sending Dashboard" 
+msgstr ""
+
+msgid "Starting Feedback Service" 
+msgstr ""
+
+msgid "Feedback Service" 
+msgstr ""
+
+msgid "Message Archive" 
+msgstr ""
+
+msgid "Manage Connections" 
+msgstr ""
+
+msgid "Manage Device Token" 
+msgstr ""
+
+msgid "Push Notification Channels" 
+msgstr ""
+
+msgid "Manage Channels" 
+msgstr ""
+
+msgid "Test Dashboard" 
+msgstr ""
+
+msgid "Developer Documentation" 
+msgstr ""
+
+msgid "Documentation" 
+msgstr ""
+
+msgid "System Auto Update" 
+msgstr ""
+
+msgid "Auto Update" 
+msgstr ""
+
+msgid "Sending Push Notification" 
+msgstr ""
+
+msgid "Queue Push" 
+msgstr ""
+
+msgid "Cancel Queue Push" 
+msgstr ""
+
+msgid "Active invalid tokens" 
+msgstr ""
+
+msgid "Watch real-time GPS" 
+msgstr ""
+
+msgid "Once every 3 days" 
+msgstr ""
+
+msgid "is available! Please update your system using the" 
+msgstr ""
+
+msgid "auto update page" 
+msgstr ""
+
+msgid "Parameter" 
+msgstr ""
+
+msgid "is required, All required parameters are" 
+msgstr ""
+
+msgid "Parameters" 
+msgstr ""
+
+msgid "at least one of them is required" 
+msgstr ""
+
+msgid "Action will be applied to all results, continue?" 
+msgstr ""
+
+msgid "Are you sure you want to continue?" 
+msgstr ""
+
+msgid "Do you want to save current changes?" 
+msgstr ""
+
+msgid "There is no tokens accept your choices" 
+msgstr ""
+
+msgid "Start queuing" 
+msgstr ""
+
+msgid "token in the queue table" 
+msgstr ""
+
+msgid "Escaped and try reconnect..." 
+msgstr ""
+
+msgid "Completed" 
+msgstr ""
+
+msgid "message queuing completed and start now in sending process" 
+msgstr ""
+
+msgid "message queued successfully for scheduling send" 
+msgstr ""
+
+msgid "Exit and return back" 
+msgstr ""
+
+msgid "Error ocurred refresh the page" 
+msgstr ""
+
+msgid "Start feedback service" 
+msgstr ""
+
+msgid "« Previous" 
+msgstr ""
+
+msgid "Next »" 
+msgstr ""
+
+msgid "Field `Device Token` is required." 
+msgstr ""
+
+msgid "An error has occurred, the system stopped and rolled back the changes." 
+msgstr ""
+
+msgid "Field title is required." 
+msgstr ""
+
+msgid "Apple Certification error or problem with Password phrase" 
+msgstr ""
+
+msgid " - Contact your host to enable outgoing ports" 
+msgstr ""
+
+msgid "Failed to connect" 
+msgstr ""
+
+msgid "Connected successfully with Apple server" 
+msgstr ""
+
+msgid "If you did not receive any message please check again your certification file and mobile code" 
+msgstr ""
+
+msgid "CURL Library is not support in your host" 
+msgstr ""
+
+msgid "Apple Response" 
+msgstr ""
+
+msgid "Google Response" 
+msgstr ""
+
+msgid "Could not connect with remote database error" 
+msgstr ""
+
+msgid "Table or ID name column is wrong" 
+msgstr ""
+
+msgid "Device Token column is wrong" 
+msgstr ""
+
+msgid "MD5 Device Token column is wrong" 
+msgstr ""
+
+msgid "Type column or Device type values is wrong" 
+msgstr ""
+
+msgid "Information column name is wrong" 
+msgstr ""
+
+msgid "Active column name is wrong" 
+msgstr ""
+
+msgid "Latidude column name is wrong" 
+msgstr ""
+
+msgid "Longitude column name is wrong" 
+msgstr ""
+
+msgid "GPS update time column name is wrong" 
+msgstr ""
+
+msgid "System did not find the related data for message" 
+msgstr ""
+
+msgid "operation cancelled" 
+msgstr ""
+
+msgid "Please reconfig the default push notification database connection" 
+msgstr ""
+
+msgid "Connection timed out or your host blocked the outgoing port 2195...System trying reconnect now" 
+msgstr ""
+
+msgid "Could not establish connection with SSL server" 
+msgstr ""
+
+msgid "Connection With Apple server established successfully" 
+msgstr ""
+
+msgid "Apple server error" 
+msgstr ""
+
+msgid "Apple server accepts the payload and start working" 
+msgstr ""
+
+msgid "Safari Certification error or problem with Password phrase" 
+msgstr ""
+
+msgid "Could not establish connection with Safari SSL server" 
+msgstr ""
+
+msgid "Connection With Safari server established successfully" 
+msgstr ""
+
+msgid "Safari server accepts the payload and start working" 
+msgstr ""
+
+msgid "Windows Phone: " 
+msgstr ""
+
+msgid "Windows Phone push notification server not responding or unauthorized response" 
+msgstr ""
+
+msgid "Connection With Windows Phone server established successfully" 
+msgstr ""
+
+msgid "Windows Phone server accepts the payload and start working" 
+msgstr ""
+
+msgid "Windows 10 push notification server returns error" 
+msgstr ""
+
+msgid "Connection With Windows 10 server established successfully" 
+msgstr ""
+
+msgid "Windows 10 server accepts the payload and start working" 
+msgstr ""
+
+msgid "Connection With BlackBerry server established successfully" 
+msgstr ""
+
+msgid "BlackBerry server accepts the payload and start working" 
+msgstr ""
+
+msgid "Google push notification server not responding" 
+msgstr ""
+
+msgid "Invalid Google API key" 
+msgstr ""
+
+msgid "Connection With Google server established successfully" 
+msgstr ""
+
+msgid "Google server accepts the payload and start working" 
+msgstr ""
+
+msgid "Chrome push notification server not responding" 
+msgstr ""
+
+msgid "Invalid Chrome API key" 
+msgstr ""
+
+msgid "Connection With Chrome server established successfully" 
+msgstr ""
+
+msgid "Chrome server accepts the payload and start working" 
+msgstr ""
+
+msgid "Connection With Firefox server established successfully" 
+msgstr ""
+
+msgid "Firefox server accepts the payload and start working" 
+msgstr ""
+
+msgid "Start connection and reading with Apple feedback server, Maybe takes some time" 
+msgstr ""
+
+msgid "Apple certification error or problem with Password phrase" 
+msgstr ""
+
+msgid "Reading from Apple feedback is finised, try to read again for more" 
+msgstr ""
+
+msgid "Start processing Google feedback queries" 
+msgstr ""
+
+msgid "Start processing Chrome feedback queries" 
+msgstr ""
+
+msgid "Report" 
+msgstr ""
+
+msgid "Total sent messages" 
+msgstr ""
+
+msgid "message" 
+msgstr ""
+
+msgid "Failure to deliver or invalid tokens" 
+msgstr ""
+
+msgid "device token" 
+msgstr ""
+
+msgid "Successful delivered" 
+msgstr ""
+
+msgid "Failure to deliver and invalid tokens" 
+msgstr ""
+
+msgid "Total Report" 
+msgstr ""
+
+msgid "Total sent" 
+msgstr ""
+
+msgid "Push Notification Subscription" 
+msgstr ""
+
+msgid "Get Notified Of New Posts" 
+msgstr ""
+
+msgid "Turn on desktop push notification" 
+msgstr ""
+
+msgid "Update Subscriptions" 
+msgstr ""
+
+msgid "Container Tag" 
+msgstr ""
+
+msgid "Container CSS Class Name" 
+msgstr ""
+
+msgid "Head Title" 
+msgstr ""
+
+msgid "Message" 
+msgstr ""
+
+msgid "Save Channels Button Text" 
+msgstr ""
+
+msgid "Show channels subscription if user is logged" 
+msgstr ""
+
+msgid "Custom CSS" 
+msgstr ""
+
+msgid "Write CSS code to customise this widget design" 
+msgstr ""
+
+msgid "Clear Archive" 
+msgstr ""
+
+msgid "Search Devices" 
+msgstr ""
+
+msgid "Bulk Actions" 
+msgstr ""
+
+msgid "Delete" 
+msgstr ""
+
+msgid "Apply" 
+msgstr ""
+
+msgid "Select All" 
+msgstr ""
+
+msgid "ID" 
+msgstr ""
+
+msgid "Start Time" 
+msgstr ""
+
+msgid "End Time" 
+msgstr ""
+
+msgid "Action" 
+msgstr ""
+
+msgid "Reports" 
+msgstr ""
+
+msgid "No items found." 
+msgstr ""
+
+msgid "items" 
+msgstr ""
+
+msgid "Time" 
+msgstr ""
+
+msgid "Total" 
+msgstr ""
+
+msgid "Fail" 
+msgstr ""
+
+msgid "Add New Channel" 
+msgstr ""
+
+msgid "Title" 
+msgstr ""
+
+msgid "Description" 
+msgstr ""
+
+msgid "Privacy" 
+msgstr ""
+
+msgid "Public" 
+msgstr ""
+
+msgid "Private" 
+msgstr ""
+
+msgid "New Channel" 
+msgstr ""
+
+msgid "Update Counters" 
+msgstr ""
+
+msgid "Subscribers" 
+msgstr ""
+
+msgid "Default" 
+msgstr ""
+
+msgid "Edit" 
+msgstr ""
+
+msgid "Note" 
+msgstr ""
+
+msgid "For how to subscribe,view or display push channels back to documentation page." 
+msgstr ""
+
+msgid "Add New Connection" 
+msgstr ""
+
+msgid "Connection Type" 
+msgstr ""
+
+msgid "Wordpress Database" 
+msgstr ""
+
+msgid "Remote Connection" 
+msgstr ""
+
+msgid "DB Host" 
+msgstr ""
+
+msgid "DB Name" 
+msgstr ""
+
+msgid "DB Username" 
+msgstr ""
+
+msgid "DB Password" 
+msgstr ""
+
+msgid "Table Name" 
+msgstr ""
+
+msgid "Use" 
+msgstr ""
+
+msgid "for the Wordpress prefix table value" 
+msgstr ""
+
+msgid "Column Names" 
+msgstr ""
+
+msgid "The table primary key name" 
+msgstr ""
+
+msgid "Device Token" 
+msgstr ""
+
+msgid "Table column that stores the devices token value" 
+msgstr ""
+
+msgid "MD5 Device Token" 
+msgstr ""
+
+msgid "Table column that stores the devices token value  as MD5 string for optimized queries later" 
+msgstr ""
+
+msgid "Active" 
+msgstr ""
+
+msgid "optional" 
+msgstr ""
+
+msgid "Name of the table column that stores the devices status 1 or 0" 
+msgstr ""
+
+msgid "Latidude" 
+msgstr ""
+
+msgid "Name of the table column that stores the devices GPS location latidude point" 
+msgstr ""
+
+msgid "Longitude" 
+msgstr ""
+
+msgid "Name of the table column that stores the devices GPS location longitude point" 
+msgstr ""
+
+msgid "GPS update time" 
+msgstr ""
+
+msgid "Name of the table column that stores GPS update time" 
+msgstr ""
+
+msgid "Information" 
+msgstr ""
+
+msgid "The table column that stores the devices information like device name, version and model" 
+msgstr ""
+
+msgid "Device Type" 
+msgstr ""
+
+msgid "Name of the table column that stores the devices type" 
+msgstr ""
+
+msgid "Device Type Values" 
+msgstr ""
+
+msgid "New Connection" 
+msgstr ""
+
+msgid "Count" 
+msgstr ""
+
+msgid "You can select the default connection from setting page" 
+msgstr ""
+
+msgid "Mute notification for this post" 
+msgstr ""
+
+msgid "Specific Channels" 
+msgstr ""
+
+msgid "All Users" 
+msgstr ""
+
+msgid "Are you sure you want to activate all invalid device tokens" 
+msgstr ""
+
+msgid "Active All Tokens" 
+msgstr ""
+
+msgid "Click to toggle" 
+msgstr ""
+
+msgid "Reference for unicode smileys codes" 
+msgstr ""
+
+msgid "Expire Time" 
+msgstr ""
+
+msgid "Hour" 
+msgstr ""
+
+msgid "Time in hours from now to keep the message alive" 
+msgstr ""
+
+msgid "Leave it empty to set to the longest default time" 
+msgstr ""
+
+msgid "GEO-fence settings" 
+msgstr ""
+
+msgid "GPS Last Update" 
+msgstr ""
+
+msgid "Set its value to 0 for ignoring the last update time" 
+msgstr ""
+
+msgid "Enter the search address..." 
+msgstr ""
+
+msgid "Radius in miles" 
+msgstr ""
+
+msgid "Watch Real-time GPS" 
+msgstr ""
+
+msgid "Device" 
+msgstr ""
+
+msgid "Calculate Devices" 
+msgstr ""
+
+msgid "Send Settings" 
+msgstr ""
+
+msgid "Send Time" 
+msgstr ""
+
+msgid "You must first add a cron job in your Cpanel for the scheduled sending, A tutorial" 
+msgstr ""
+
+msgid "here" 
+msgstr ""
+
+msgid "Device type" 
+msgstr ""
+
+msgid "In channels (AND)" 
+msgstr ""
+
+msgid "Users subscribed in channels with AND relation" 
+msgstr ""
+
+msgid "In channels (OR)" 
+msgstr ""
+
+msgid "Users subscribed in channels with OR relation" 
+msgstr ""
+
+msgid "Not in channels (AND)" 
+msgstr ""
+
+msgid "Users not subscribed in channels with AND relation" 
+msgstr ""
+
+msgid "Not in channels (OR)" 
+msgstr ""
+
+msgid "Users not subscribed in channels with OR relation" 
+msgstr ""
+
+msgid "Enable feedback will find and deactivate the invalid devices tokens" 
+msgstr ""
+
+msgid "iOS Test Mode" 
+msgstr ""
+
+msgid "Enable iOS test mode if you try to test push notification in your app" 
+msgstr ""
+
+msgid "What happen that system will feedback every token to prevent Apple cancel connection" 
+msgstr ""
+
+msgid "Start Sending Now" 
+msgstr ""
+
+msgid "Automatic Scheduled Sending" 
+msgstr ""
+
+msgid "Desktop Adjustments" 
+msgstr ""
+
+msgid "Link To Open" 
+msgstr ""
+
+msgid "Open link when user clicks on notification message" 
+msgstr ""
+
+msgid "Icon" 
+msgstr ""
+
+msgid "Select File" 
+msgstr ""
+
+msgid "Choose an icon in a standard size 192x192 px" 
+msgstr ""
+
+msgid "Message Payload" 
+msgstr ""
+
+msgid "Type" 
+msgstr ""
+
+msgid "Multi Values" 
+msgstr ""
+
+msgid "Normal Text" 
+msgstr ""
+
+msgid "JSON" 
+msgstr ""
+
+msgid "Payload" 
+msgstr ""
+
+msgid "key" 
+msgstr ""
+
+msgid "value" 
+msgstr ""
+
+msgid "Keys with empty values will ignore." 
+msgstr ""
+
+msgid "Send with push message as name `relatedvalue`" 
+msgstr ""
+
+msgid "Customize Android Payload" 
+msgstr ""
+
+msgid "Customize Windows Phone 8 Payload" 
+msgstr ""
+
+msgid "Customize Windows 10 Payload" 
+msgstr ""
+
+msgid "Image link to appear beside the subject of push message ." 
+msgstr ""
+
+msgid "iOS Adjustments" 
+msgstr ""
+
+msgid "Lock Key" 
+msgstr ""
+
+msgid "Change (view) sentence in (Slide to view)" 
+msgstr ""
+
+msgid "Badge" 
+msgstr ""
+
+msgid "The number to display as the badge of the application icon." 
+msgstr ""
+
+msgid "Sound" 
+msgstr ""
+
+msgid "The name of a sound file in the application bundle." 
+msgstr ""
+
+msgid "Content Available" 
+msgstr ""
+
+msgid "Provide this key with a value of 1 to indicate that new content is available." 
+msgstr ""
+
+msgid "Launch Image" 
+msgstr ""
+
+msgid "The filename of an image file in the application bundle." 
+msgstr ""
+
+msgid "Save Current Setting" 
+msgstr ""
+
+msgid "Clear History" 
+msgstr ""
+
+msgid "Send Progress" 
+msgstr ""
+
+msgid "Loading..." 
+msgstr ""
+
+msgid "Cancel Send Operation" 
+msgstr ""
+
+msgid "Push Notification Settings" 
+msgstr ""
+
+msgid "General Settings" 
+msgstr ""
+
+msgid "Authentication Key" 
+msgstr ""
+
+msgid "Send this key with any request with a parameter called <code>auth_key</code> to prevent access to API from outside ." 
+msgstr ""
+
+msgid "Also you can send this key in the header of each request in a parameter called <code>auth_key</code> for more security ." 
+msgstr ""
+
+msgid "Leave it empty to disable this feature ." 
+msgstr ""
+
+msgid "API Base Name" 
+msgstr ""
+
+msgid "Default Connection" 
+msgstr ""
+
+msgid "Auto Geolocation" 
+msgstr ""
+
+msgid "Enable auto collecting the device location from its connection point if system does not receive the location parameters (Not 100% Accurate)" 
+msgstr ""
+
+msgid "Geolocation Provider" 
+msgstr ""
+
+msgid "API Key" 
+msgstr ""
+
+msgid "Save All Settings" 
+msgstr ""
+
+msgid "Apple Connection Settings" 
+msgstr ""
+
+msgid "Certification Type" 
+msgstr ""
+
+msgid "Enable Apple sandbox server for development certification type" 
+msgstr ""
+
+msgid "Password Phrase" 
+msgstr ""
+
+msgid "Apple password phrase for sending push notification." 
+msgstr ""
+
+msgid "Certification .PEM File" 
+msgstr ""
+
+msgid "Message Truncate" 
+msgstr ""
+
+msgid "Disable truncate iOS push message if exceeds the allowed payload" 
+msgstr ""
+
+msgid "Android Connection Settings" 
+msgstr ""
+
+msgid "Google API key for sending Android push notification." 
+msgstr ""
+
+msgid "Windows Phone 8 Settings" 
+msgstr ""
+
+msgid "Authenticated" 
+msgstr ""
+
+msgid "Windows Phone 8 authenticated apps have no limit quota for sending daily." 
+msgstr ""
+
+msgid "Certificate File" 
+msgstr ""
+
+msgid "Private key" 
+msgstr ""
+
+msgid "CA Info" 
+msgstr ""
+
+msgid "Universal Windows 10 Settings" 
+msgstr ""
+
+msgid "Package SID" 
+msgstr ""
+
+msgid "Client Secret" 
+msgstr ""
+
+msgid "BlackBerry Connection Settings" 
+msgstr ""
+
+msgid "Development Mode" 
+msgstr ""
+
+msgid "Enable development mode" 
+msgstr ""
+
+msgid "Application ID" 
+msgstr ""
+
+msgid "Password" 
+msgstr ""
+
+msgid "$0" 
+msgstr ""
+
+msgid "Content Provider ID is provided by BlackBerry in the email you received." 
+msgstr ""
+
+msgid "Titanium Compatibility" 
+msgstr ""
+
+msgid "Make iOS" 
+msgstr ""
+
+msgid "Make Android" 
+msgstr ""
+
+msgid "Corona Compatibility" 
+msgstr ""
+
+msgid "Make the message structure compatible with Corona platform" 
+msgstr ""
+
+msgid "Desktop Notifications" 
+msgstr ""
+
+msgid "Enable desktop push notification listeners" 
+msgstr ""
+
+msgid "Show modal box to request from visitor to allow notification for your site" 
+msgstr ""
+
+msgid "Modal Head Title" 
+msgstr ""
+
+msgid "Modal Message" 
+msgstr ""
+
+msgid "Subscribe Button Text" 
+msgstr ""
+
+msgid "Unsubscribe Button Text" 
+msgstr ""
+
+msgid "Ignore Button Text" 
+msgstr ""
+
+msgid "Default Icon" 
+msgstr ""
+
+msgid "Enable desktop push notification listener for Chrome browser" 
+msgstr ""
+
+msgid "Chrome push notification requires your site working under <code>HTTPS</code> protocol ." 
+msgstr ""
+
+msgid "Project Number" 
+msgstr ""
+
+msgid "For how to get API key and project number" 
+msgstr ""
+
+msgid "Enable desktop push notification listener for Firefox browser" 
+msgstr ""
+
+msgid "Firefox push notification requires your site working under <code>HTTPS</code> protocol ." 
+msgstr ""
+
+msgid "Enable desktop push notification listener for Safari browser" 
+msgstr ""
+
+msgid "Safari push notification requires your site working under <code>HTTPS</code> protocol ." 
+msgstr ""
+
+msgid "Certification .P12 File" 
+msgstr ""
+
+msgid "We provide a paid service to generate your certificates for $10 only" 
+msgstr ""
+
+msgid "request now" 
+msgstr ""
+
+msgid "Website Push ID" 
+msgstr ""
+
+msgid "The Website Push ID, as specified in your registration with the Member Center." 
+msgstr ""
+
+msgid "Push Icon" 
+msgstr ""
+
+msgid "Choose an icon in a standard size 256x256 px" 
+msgstr ""
+
+msgid "Push Notification Events" 
+msgstr ""
+
+msgid "Notify all members when administrator published a new post" 
+msgstr ""
+
+msgid "Notice: To use this feature first please enable the cron-job service, Look" 
+msgstr ""
+
+msgid "for further information" 
+msgstr ""
+
+msgid "Notify only members which subscribed in a channel name equivalent with the post category name" 
+msgstr ""
+
+msgid "Notify author when administrator approved and published his post" 
+msgstr ""
+
+msgid "Notify user when administrator approved on his comment" 
+msgstr ""
+
+msgid "Notify author when added new comment on his post" 
+msgstr ""
+
+msgid "Notify user when someone comment on his comment" 
+msgstr ""
+
+msgid "Notify all users subscribed in a post when has got a new update" 
+msgstr ""
+
+msgid "Notice: System will replace {subject},{comment} words with the subject of topic or comment content." 
+msgstr ""
+
+msgid "Notice: System will send the topic ID with the push notification message as name `relatedvalue`." 
+msgstr ""
+
+msgid "Sending Options" 
+msgstr ""
+
+msgid "Test push notification functionality !" 
+msgstr ""
+
+msgid "Send a test message" 
+msgstr ""
+
+msgid "Add New Device" 
+msgstr ""
+
+msgid "Edit Device Info" 
+msgstr ""
+
+msgid "Channels" 
+msgstr ""
+
+msgid "Latidude Point" 
+msgstr ""
+
+msgid "Longitude Point" 
+msgstr ""
+
+msgid "Yes" 
+msgstr ""
+
+msgid "No" 
+msgstr ""
+
+msgid "It is highly recommended to take a backup from the table before start, Continue" 
+msgstr ""
+
+msgid "Remove Duplicates" 
+msgstr ""
+
+msgid "Search Devices:" 
+msgstr ""
+
+msgid "Activate" 
+msgstr ""
+
+msgid "Deactivate" 
+msgstr ""
+
+msgid "Apply to all" 
+msgstr ""
+
+msgid "Inactive" 
+msgstr ""
+
+msgid "View all channels" 
+msgstr ""
+
+msgid "Filter" 
+msgstr ""
+
+msgid "Main Channel" 
+msgstr ""
+
+msgid "Plugin default connection" 
+msgstr ""
+
+msgid "Keep me posted" 
+msgstr ""
+
+msgid "Give us a permission to receive push notification messages and we will keep you posted !" 
+msgstr ""
+
+msgid "Enable Push Messages" 
+msgstr ""
+
+msgid "Disable Push Messages" 
+msgstr ""
+
+msgid "Ignore" 
+msgstr ""
+
+msgid "Your post "{subject}" is approved and published" 
+msgstr ""
+
+msgid "Your comment "{comment}" is approved and published now" 
+msgstr ""
+
+msgid "Your post "{subject}" have new comments, Keep in touch with your readers" 
+msgstr ""
+
+msgid "Someone reply on your comment "{comment}"" 
+msgstr ""
+
+msgid "The post you subscribed in "{subject}" got updated" 
+msgstr ""
+
+msgid "We have published a new topic "{subject}"" 
+msgstr ""
+
+msgid "Make iOS's payload compatible with Titanium platform" 
+msgstr ""
+
+msgid "Make Android's payload compatible with Titanium platform" 
+msgstr ""
+
+# version 5.2 translations
+msgid "CPID" 
+msgstr ""
+
+msgid "Buy one for $9 only" 
+msgstr ""
+
+# version 5.3 translations
+msgid "Event Manager" 
+msgstr ""
+
+msgid "All fields are required." 
+msgstr ""
+
+msgid "Choose Attribute" 
+msgstr ""
+
+msgid "Post Attributes" 
+msgstr ""
+
+msgid "Postmeta Attributes" 
+msgstr ""
+
+msgid "Please create at least one post of this post type to enable creating a push event for it" 
+msgstr ""
+
+msgid "Search Messages:" 
+msgstr ""
+
+msgid "Add New Event" 
+msgstr ""
+
+msgid "Event Type" 
+msgstr ""
+
+msgid "Published for first time" 
+msgstr ""
+
+msgid "Get approval to publish" 
+msgstr ""
+
+msgid "Get new changes or updates" 
+msgstr ""
+
+msgid "Post Type" 
+msgstr ""
+
+msgid "Select Post Type" 
+msgstr ""
+
+msgid "Push Message" 
+msgstr ""
+
+msgid "Select Format" 
+msgstr ""
+
+msgid "Default Value" 
+msgstr ""
+
+msgid "Insert" 
+msgstr ""
+
+msgid "Ignore Case" 
+msgstr ""
+
+msgid "Ignore sending the message if one of its variables is empty or equal zero value ." 
+msgstr ""
+
+msgid "Conditions" 
+msgstr ""
+
+msgid "Remove" 
+msgstr ""
+
+msgid "Write Value" 
+msgstr ""
+
+msgid "Choose Sign" 
+msgstr ""
+
+msgid "e.g. 1 or Now() or Date()" 
+msgstr ""
+
+msgid "e.g. 1 , value , value , 3" 
+msgstr ""
+
+msgid "AND" 
+msgstr ""
+
+msgid "Notify Segment" 
+msgstr ""
+
+msgid "All Registered Users" 
+msgstr ""
+
+msgid "User that published the post" 
+msgstr ""
+
+msgid "Users add a comment in the post" 
+msgstr ""
+
+msgid "Specify a user ID attribute" 
+msgstr ""
+
+msgid "User ID Device" 
+msgstr ""
+
+msgid "Select the userID attribute to send the device that is related to this userID value only ." 
+msgstr ""
+
+msgid "Desktop Push Link" 
+msgstr ""
+
+msgid "Enable open the post link when click on desktop push notification" 
+msgstr ""
+
+msgid "Status" 
+msgstr ""
+
+msgid "Manage Events" 
+msgstr ""
+
+msgid "New Event" 
+msgstr ""
+
+msgid "BuddyPress Events" 
+msgstr ""
+
+msgid "Enable user receive push notification for friends component" 
+msgstr ""
+
+msgid "Enable user receive push notification for messages component" 
+msgstr ""
+
+msgid "Enable user receive push notification for activity component" 
+msgstr ""
+
+msgid "Enable user receive push notification for xprofile component" 
+msgstr ""
+
+msgid "We have published a new topic `{$post_title}`" 
+msgstr ""
+
+msgid "Your post `{$post_title}` is approved and published" 
+msgstr ""
+
+msgid "The post you subscribed in `{$post_title}` got new updates" 
+msgstr ""
+
+# version 5.4 translations
+msgid "Leave it empty to make the notification body unclickable" 
+msgstr ""
+
+msgid "Send push notifications for group activities to administrators only" 
+msgstr ""
+
+# version 5.5 translations
+msgid "Enable desktop push notification debug mode" 
+msgstr ""
+
+# version 5.6 translations
+msgid "Wrong parameters" 
+msgstr ""
+
+msgid "Pass To Function" 
+msgstr ""
+
+msgid "Post Functions" 
+msgstr ""
+
+msgid "Permalink" 
+msgstr ""
+
+msgid "Publish Date" 
+msgstr ""
+
+msgid "Last Update Date" 
+msgstr ""
+
+msgid "Categories" 
+msgstr ""
+
+msgid "Tags" 
+msgstr ""
+
+msgid "User Functions" 
+msgstr ""
+
+msgid "Display Name" 
+msgstr ""
+
+msgid "Email" 
+msgstr ""
+
+msgid "Username" 
+msgstr ""
+
+msgid "Reset Table Views" 
+msgstr ""
+
+msgid "User" 
+msgstr ""
+
+# version 5.9 translations
+msgid "This channel name is taken" 
+msgstr ""
+
+msgid "Channel added successfully" 
+msgstr ""
+
+msgid "Channel updated successfully" 
+msgstr ""
+
+msgid "Channel deleted successfully" 
+msgstr ""
+
+msgid "Show this widget for logged users only" 
+msgstr ""
+
+msgid "Google Maps API Key" 
+msgstr ""
+
+msgid "App ID" 
+msgstr ""
+
+msgid "App ID under App IDs page in Identifiers block." 
+msgstr ""
+
+msgid "Enable desktop push notification for logged users only" 
+msgstr ""
+
+msgid "Saved Button Text" 
+msgstr ""
+
+msgid "Saved" 
+msgstr ""
+
+# version 5.91 translations
+msgid "Apple API Version" 
+msgstr ""
+
+msgid "New Apple API version uses new HTTP/2 protocol [Recommended]" 
+msgstr ""
+
+msgid "Old Apple API version uses SSL connection" 
+msgstr ""
+
