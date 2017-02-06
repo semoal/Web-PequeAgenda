@@ -24,21 +24,21 @@
                       'compare' => '>=',
                       'value' => $currentdate,
                       'type' => 'DATE',
-                    )),
+                    )), 
                 'meta_key' => 'fecha_fin',
                 'orderby' => 'meta_value',
                 'order' => 'ASC',
-                'posts_per_page' => 100,
-                'paged' => $paged,
+                'posts_per_page' => -1,
             );
                 $query = new WP_Query( $args );
                   if( $query->have_posts() ) {  
                     while ($query->have_posts()) :
-                            $query->the_post(); 
+                            $query->the_post();
+
                                 $tmp_loc = [];
                                 $tmp_loc["id"] = $i;
                                 $tmp_loc["Titulo"] = get_the_title();
-                                $tmp_loc["contenido"] =    preg_replace('~[[:cntrl:]]~', '', get_the_content());
+                                $tmp_loc["contenido"] = preg_replace('~[[:cntrl:]]~', '', get_the_content());
                                 $address = get_field( "direccion" );
                                 $coordenadas_tmp = get_field("coord");
                                 if (isset($coordenadas_tmp["address"],$coordenadas_tmp["lng"],$coordenadas_tmp["lng"])) {
@@ -48,16 +48,13 @@
                                 }
                                 $tmp_loc["telefono"] = get_field( "telefono" );
                                 $tmp_loc["pases"] = get_field("fecha_pases");
-                                if ($tmp_loc["pases"]) {
-                                	$tmp_loc["pases_html"] = "<span>";
-	                                foreach ($tmp_loc["pases"] as $pase) {
-	                                	$tmp_loc["pases_html"] .= "<span>" . implode ($pase) . "</span>". ', ';
-	                                }
-	                                $tmp_loc["pases_html"] .= "</span>";
-	                            } else {
-                                    //$tmp_loc["pases"]["pase"][]= get_field( "fecha_inicio" );
-                                    //$tmp_loc["pases_html"] = "<span>" . implode ($tmp_loc["pases"]) . "</span>";
-                                }
+                                $tmp_loc["pases_html"] = "<span>";
+                                if ($tmp_loc["pases"]) {                            
+                                    foreach ($tmp_loc["pases"] as $pase) {
+                                        $tmp_loc["pases_html"] .= "<span>" . implode ($pase) . "</span>". ', ';
+                                    }   
+                                } 
+                                $tmp_loc["pases_html"] .= "</span>";
                                 
                                 $tmp_loc["fecha-inicio"] = get_field( "fecha_inicio" );
                                 $tmp_loc["fecha-fin"] = get_field( "fecha_fin" );
@@ -75,30 +72,25 @@
                     endwhile;
                     wp_reset_query();
         ?>
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
     <script>
-        var locations = JSON.parse('<?php echo json_encode($locations); ?>');
-        
+        var panelOpened = true;
+        var locations = <?php echo json_encode($locations, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE); ?>;
+        console.log(locations);
         var getMarkers = function(i) {
             return markers[i];
             }   
         var markers = [];
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+              infoWindow.setPosition(pos);
+              infoWindow.setContent(browserHasGeolocation ?
+                                    'Error: El servicio de Geolocalizacion ha fallado.' :
+                                    'Error: Tu navegador no soporta geolocalización.');
+            }
 
-        function initMap() {
-            var myLatLng = {
-                lat: 40.4637,
-                lng: -3.703790,
-            };
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 5,
-                  zoomControl: true,
-                  disableDefaultUI: true,
-                  center: myLatLng,
-                  gestureHandling: 'greedy'
-
-            });
-
-                  
-            var isMobile = {
+        var isMobile = {
                 Android: function() {
                     return navigator.userAgent.match(/Android/i);
                 },
@@ -117,28 +109,278 @@
                 any: function() {
                     return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
                 }
-            };
+        };
+        //Detecta si  es la primera visita del usuario y muestra un tutorial
+        $(function() {
+            $('.hint').firstVisit();
+        });
+        //Función para geolocalizar la ubicación del usuario
+        function clickGeoButton() {
+            if(!!navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); 
+                    var userMarker = new google.maps.Marker({
+                        map: map,
+                        position: geolocate
+                    });
+
+                    map.setCenter(geolocate);
+                    map.setZoom(14);    
+                    userMarker.setAnimation(google.maps.Animation.BOUNCE);
+                    if (panelOpened) map.panBy(document.getElementById('map').offsetWidth/4, 0);
+                    setTimeout(function(){ userMarker.setAnimation(null); });                               
+                });
+                
+            } else {
+                document.getElementById('map').innerHTML = 'No Geolocation Support.';
+            }
+        }
+
+        //Abrimos el listado derecho y cambiamos el icono para activar una nueva funcionalidad
+        function clickTimeButton() {
+            //open.preventDefault();
+            $('#button-slide-menu').stop().hide();
+            $('#button-slide-menu-pint').stop().show(); 
+            panelWidth = (isMobile.any() ? '100%' : '50%');
+            $('#mySidenav').stop().animate({width: panelWidth , opacity: '1'});
+            $('#container').stop().animate({opacity: '1',width: panelWidth});
+            if (isMobile.any()) {
+                $('.first-div-close').stop().show();
+                $('.rectangle-bottom').stop().hide();
+                $('.second-div-close').stop().hide();
+            } else {
+                setTimeout(function(){
+                        $('#info-left-close').stop().fadeIn(); 
+                    },300);
+                $('#info-left-close-second').stop().hide();
+            }
+            $('#right-second').stop().animate({width: '0'});
+            $('#button-slide-menu').stop().hide();
+            $('#button-slide-menu-pint').stop().show();
+            $('#rangoLocalizacion').stop().hide();
+            $('#botInfW').stop().hide(); 
+            panelOpened = true;        
+        };
+
+        //Abrimos el pinterest style 
+        function clickPintButton() {
+            //change.preventDefault();
+            $('.first-div-close').stop().hide();
+            $('.second-div-close').stop().show();
+            $('#mySidenav').stop().animate({width: '0'});
+            panelWidth = (isMobile.any() ? '100%' : '50%');
+            $('#right-second').stop().animate({width: panelWidth, opacity: '1'});
+            $('#container').stop().animate({width: panelWidth});
+            $('#button-slide-menu-pint').stop().hide();
+            $('#button-slide-menu').stop().show();
+            $('#rangoLocalizacion').stop().show();
+            $('#botInfW').stop().hide();
+            if (isMobile.any()) {
+                $('.rectangle-bottom').stop().hide();
+            }else {
+                $('#info-left-close-second-mobile').stop().hide();
+                $('#info-left-close').stop().hide();
+                setTimeout(function(){
+                    $('#info-left-close-second').stop().fadeIn(); 
+                },300);
+            }
+            panelOpened = true;   
+        } 
+
+        function clickCloseTimeButton(){
+            //Cerramos el listado derecho y cambiamos el icono para volver al origen
+            $('#mySidenav').stop().animate({width: '0'});
+            $('#button-slide-menu').stop().show();
+            $('#button-slide-menu-pint').stop().hide();
+            $('#info-left-close.second').stop().hide();
+            $('#info-left-close').stop().hide();
+            $('#container').stop().animate({width: '100%'});
+            $('#botInfW').stop().show();
+            $('.rectangle-bottom').stop().show(); 
+            $('#right-second').stop().animate({width: '0'});
+            $('#button-slide-menu').stop().hide();
+            $('#button-slide-menu-pint').stop().show();
+            $('#info-left-close-second').stop().hide();
+            $('#rangoLocalizacion').stop().hide();
+            $('#container').stop().animate({width: '100%'});
+            $('#botInfW').stop().show();
+            $('.rectangle-bottom').stop().show();
+            panelOpened = false;                       
+        }
+            
+        //Ventana de cada marcador
+        function markerWindowOpen() {
+            $('#botInfW').stop().animate({
+                opacity: '1',
+                height: '25%'
+            });
+            $('#container').stop().animate({
+                opacity: '1',
+                height: '75%'
+            });
+            $('.rectangle-bottom').stop().animate({
+                opacity: '0',
+             });
+
+             $('#botInfW').one("click", function (e) {
+                e.preventDefault();
+               $('#botInfW').stop().animate({opacity: '1', height: '50%', width: '100%;' },250, function(){
+                });
+
+               $('#container').stop().animate({opacity: '1', height: '50%', width: '100%;' },250, function(){
+                });
+            });
+            $('#buttonclose').stop().on("click", function (event) {
+               event.stopPropagation();
+               $('#botInfW').stop().animate({opacity: '1', height: '0%', width: '100%;', display: 'none;' },250, function(){
+                });
+               $('#container').stop().animate({opacity: '1', height: '100%', width: '100%;' },250, function(){
+                });
+               $('.rectangle-bottom').stop().animate({opacity: '1',});
+            });
+        }
+
+        //Cerramos el listado derecho y cambiamos el icono para volver al origen - Mobile
+        function closeOpenList() {
+            $('.first-div-close').stop().on("click", function (close) {
+                close.preventDefault();
+                $('#mySidenav').stop().animate({width: '0'});
+                $('#button-slide-menu').stop().show();
+                $('#button-slide-menu-pint').stop().hide();
+                $('.second-div-close').stop().hide();
+                $('.first-div-close').stop().hide();
+                $('#container').stop().animate({width: '100%'});
+                $('#botInfW').stop().show();
+                $('.rectangle-bottom').stop().show();
+                panelOpened = false;                    
+            });
+        }
+        //Cerramos el listado derecho y cambiamos el icono para volver al origen - Desktop
+        function closeRightIcon() {
+            $('#info-left-close').stop().on("click", function (close) {
+                close.preventDefault();
+                $('#mySidenav').stop().animate({width: '0'});
+                $('#button-slide-menu').stop().show();
+                $('#button-slide-menu-pint').stop().hide();
+                $('#info-left-close.second').stop().hide();
+                $('#info-left-close').stop().hide();
+                $('#container').stop().animate({width: '100%'});
+                $('#botInfW').stop().show();
+                $('.rectangle-bottom').stop().show(); 
+                panelOpened = false;                   
+            });
+        }
+
+        //Cerramos el pinterest style - Mobile
+        function closePint() {
+           $('.second-div-close').stop().on("click", function (close2) {
+                close2.preventDefault();
+                $('#right-second').stop().animate({width: '0'});
+                $('#button-slide-menu').stop().hide();
+                $('#button-slide-menu-pint').stop().show();
+                $('.second-div-close').stop().hide();
+                $('#rangoLocalizacion').stop().hide();
+                $('#container').stop().animate({width: '100%'});
+                $('#botInfW').stop().show();
+                $('.rectangle-bottom').stop().show();
+                panelOpened = false;
+            }); 
+        }
+
+        //Cerramos el pinterest style - Desktop
+        function closeColumns() {
+            $('#columns-pictures').stop().on("click", function (ouyhyea) {
+                ouyhyea.preventDefault();
+                $('#right-second').stop().animate({width: '0'});
+                $('#button-slide-menu').stop().hide();
+                $('#button-slide-menu-pint').stop().show();
+                $('#info-left-close-second').stop().hide();
+                $('#rangoLocalizacion').stop().hide();
+                $('#container').stop().animate({width: '100%'});
+                $('#botInfW').stop().show();
+                $('.rectangle-bottom').stop().show();
+            });
+        }
+        
+        //Version inicial para menu - Mobile
+        function menuInicial() {
+            if(isMobile.any()){
+                $('#button-slide-menu-pint').stop().hide();
+                $('.first-div-close').stop().hide();
+                $('.second-div-close').stop().hide();
+                $('#rangoLocalizacion').stop().hide();
+            }else {
+                //Version inicial para menu - Desktop
+                $('#button-slide-menu-pint').stop().hide();
+                $('#info-left-close').stop().hide();
+                $('#info-left-close-second').stop().hide();
+                $('#rangoLocalizacion').stop().hide();
+            }
+        }  
+
+        //Version inicial para menu - Desktop
+        function closePintDesktop() {
+            $('#info-left-close-second').stop().on("click", function (close2) {
+                close2.preventDefault();
+                $('#right-second').stop().animate({width: '0'});
+                $('#button-slide-menu').stop().hide();
+                $('#button-slide-menu-pint').stop().show();
+                $('#info-left-close-second').stop().hide();
+                $('#rangoLocalizacion').stop().hide();
+                $('#container').stop().animate({width: '100%'});
+                $('#botInfW').stop().show();
+                $('.rectangle-bottom').stop().show();
+                panelOpened = false;
+            });
+        }
+
+        //Inicializamos el mapa con sus markers
+        function initMap() {
+
+            var infowindow = new google.maps.InfoWindow;
+            var temp_loc;
+            var i;
+            var displayResults;
+
+            var myLatLng = {
+                    lat: 39.4773119,
+                    lng: -0.2819436,
+                };
+            if (isMobile.any()) {
+                myLatLng = {
+                    lat: 39.4686019,
+                    lng: -0.3629412,
+                };
+            }
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                  zoomControl: true,
+                  disableDefaultUI: true,
+                  center: myLatLng,
+                  gestureHandling: 'greedy'
+            });
             
             var getLocations = function(i) {
                 return $.grep(locations, function(e){ return e.id == i; });
             }
 
-            var infowindow = new google.maps.InfoWindow;
-            var temp_loc;
-            var marker, i;
-            var displayResults;
-            
-            //Any mobile
-        if( isMobile.any() )  
             for (i = 0; i < locations.length; i++) {
-                marker = new google.maps.Marker({
+                var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(locations[i]["latitude"], locations[i]["longitude"]),
                     map: map,
                     icon: locations[i]['icono'],
                     optimized: false
                 });
-                google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                    return function() {
+                locations[i]["marker"]=marker;
+            }
+            
+            //Any mobile
+            if( isMobile.any() ) {
+                for (i = 0; i < locations.length; i++) {
+                    marker = locations[i]["marker"];
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                      return function() {
                         map.setZoom(15);
                         marker.setAnimation(google.maps.Animation.BOUNCE);
                         setTimeout(function(){ marker.setAnimation(null); }, 5000);
@@ -166,149 +408,16 @@
                         locations[i]["precio"] + '€' + '<br>' + 
                         '<b> Edad recomendada:</b>' + ' ' + 'De ' + locations[i]["edad"]["min"] + ' años, a ' +locations[i]["edad"]["max"]+ ' años. '+ '<br>';
                         map.setCenter(marker.getPosition());
-                        $('#botInfW').stop().animate({
-                            opacity: '1',
-                            height: '25%'
-                        });
-                        $('#container').stop().animate({
-                            opacity: '1',
-                            height: '75%'
-                        });
-                        $('.rectangle-bottom').stop().animate({
-                            opacity: '0',
-                         });
 
-                         $('#botInfW').one("click", function (e) {
-                                e.preventDefault();
-                               $('#botInfW').stop().animate({opacity: '1', height: '50%', width: '100%;' },250, function(){
-                                });
-
-                               $('#container').stop().animate({opacity: '1', height: '50%', width: '100%;' },250, function(){
-                                });
-                            });
-                         $('#buttonclose').stop().on("click", function (event) {
-                               event.stopPropagation();
-                               $('#botInfW').stop().animate({opacity: '1', height: '0%', width: '100%;', display: 'none;' },250, function(){
-                                });
-                               $('#container').stop().animate({opacity: '1', height: '100%', width: '100%;' },250, function(){
-                                });
-                               $('.rectangle-bottom').stop().animate({opacity: '1',});
-                           });
-
-                }
-
-                })(marker, i));
-
-                markers.push(marker);
-                //Función para geolocalizar la ubicación del usuario
-                 $( ".fa-location-arrow" ).click(function() {
-                        (function(geolocatingUser) {
-                            if(!!navigator.geolocation) {
-                                navigator.geolocation.getCurrentPosition(function(position) {
-                                    var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); 
-                                    var marker = new google.maps.Marker({
-                                        map: map,
-                                        position: geolocate
-                                    });
-
-                                    map.setCenter(geolocate);
-                                    map.setZoom(16);    
-                                    marker.setAnimation(google.maps.Animation.BOUNCE);
-                                    setTimeout(function(){ marker.setAnimation(null); });                               
-                                });
-                                
-                            } else {
-                                document.getElementById('map').innerHTML = 'No Geolocation Support.';
-                            }
-                            
-                        })();
-                    });
-               //Version inicial para menu
-                    $('#button-slide-menu-pint').stop().hide();
-                    $('.first-div-close').stop().hide();
-                    $('.second-div-close').stop().hide();
-                    $('#rangoLocalizacion').stop().hide();
-            //Abrimos el listado derecho y cambiamos el icono para activar una nueva funcionalidad
-                 $('#button-slide-menu').on("click", function (open) {
-                        open.preventDefault();
-                    $('#button-slide-menu').stop().hide();
-                    $('#button-slide-menu-pint').stop().show(); 
-                    $('#mySidenav').stop().animate({width: '100%', opacity: '1'});
-                    $('#container').stop().animate({opacity: '1',width: '100%'});
-                    $('.first-div-close').stop().show();
-                    $('#right-second').stop().animate({width: '0'});
-                    $('#button-slide-menu').stop().hide();
-                    $('#button-slide-menu-pint').stop().show();
-                    $('.second-div-close').stop().hide();
-                    $('#rangoLocalizacion').stop().hide();
-                    $('#botInfW').stop().hide();
-                    $('.rectangle-bottom').stop().hide();
-
-
-                });
-            //Abrimos el pinterest style 
-                $('#button-slide-menu-pint').on("click", function (change) {
-                    change.preventDefault();
-                    $('.first-div-close').stop().hide();
-                    $('.second-div-close').stop().show();
-                    $('#mySidenav').stop().animate({width: '0'});
-                    $('#right-second').stop().animate({width: '100%', opacity: '1'});
-                    $('#container').stop().animate({width: '100%'});
-                    $('#button-slide-menu-pint').stop().hide();
-                    $('#button-slide-menu').stop().show();
-                    $('#rangoLocalizacion').stop().show();
-                    $('#botInfW').stop().hide();
-                    $('.rectangle-bottom').stop().hide();
-                }); 
-            //Cerramos el listado derecho y cambiamos el icono para volver al origen
-                $('.first-div-close').stop().on("click", function (close) {
-                    close.preventDefault();
-                    $('#mySidenav').stop().animate({width: '0'});
-                    $('#button-slide-menu').stop().show();
-                    $('#button-slide-menu-pint').stop().hide();
-                    $('.second-div-close').stop().hide();
-                    $('.first-div-close').stop().hide();
-                    $('#container').stop().animate({width: '100%'});
-                    $('#botInfW').stop().show();
-                    $('.rectangle-bottom').stop().show();                    
-                });
-            //Cerramos el pinterest style
-                $('.second-div-close').stop().on("click", function (close2) {
-                    close2.preventDefault();
-                    $('#right-second').stop().animate({width: '0'});
-                    $('#button-slide-menu').stop().hide();
-                    $('#button-slide-menu-pint').stop().show();
-                    $('.second-div-close').stop().hide();
-                    $('#rangoLocalizacion').stop().hide();
-                    $('#container').stop().animate({width: '100%'});
-                    $('#botInfW').stop().show();
-                    $('.rectangle-bottom').stop().show();
-                });
-
-                $('#results').stop().on("click", function(concadenar) {
-                    $('#mySidenav').stop().animate({width: '0'});
-                    $('#right-second').stop().animate({width: '0'});
-                    $('#button-slide-menu').stop().hide();
-                    $('#button-slide-menu-pint').stop().show();
-                    $('.second-div-close').stop().hide();
-                    $('#rangoLocalizacion').stop().hide();
-                    $('#container').stop().animate({width: '100%'});
-                    $('#botInfW').stop().show();
-                    $('.rectangle-bottom').stop().show();
-                    $('#button-slide-menu').stop().show();
-                    $('#button-slide-menu-pint').stop().hide();
-                    $('.second-div-close').stop().hide();
-                    $('.first-div-close').stop().hide();
-                    $('#container').stop().animate({width: '100%'});
-                    $('#botInfW').stop().show();
-                    $('.rectangle-bottom').stop().show();   
-                    $('.rectangle-bottom').stop().animate({opacity: '0',});
-                    $('#botInfW').stop().animate({opacity: '1', height: '25%', width: '100%;' },250, function(){});
-                    $('#container').stop().animate({opacity: '1', height: '75%', width: '100%;' },250, function(){});
-                });
-            }
-        //Computer
-            else {  
+                        markerWindowOpen();
+                        
+                        
+                    }})(marker, i));
+                    closeOpenList();
+                    closePint();
+                    menuInicial();              
+                } 
+            }else {  
                 for (i = 0; i < locations.length; i++) {
                     var infowindow_content =
                     '<div class="main-info">' +
@@ -336,12 +445,7 @@
                     '<b> Edad recomendada:</b>' + ' ' +
                     'De '+ locations[i]["edad"]["min"] + ' años, a ' +locations[i]["edad"]["max"]+ ' años. '+ '<br>' + '</div>';
 
-                    marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(locations[i]["latitude"], locations[i]["longitude"]),
-                        map: map,
-                        icon: locations[i]['icono'],
-                        optimized: false
-                    });
+                    marker = locations[i].marker;
                     google.maps.event.addListener(marker, 'click', (function(marker, i, infowindow_content) {
                         return function() {
                             infowindow.setContent(infowindow_content);
@@ -354,98 +458,12 @@
                                  });
                     })(marker, i, infowindow_content));
 
-                    markers.push(marker); 
-                    } 
-                        $( ".fa-location-arrow").click(function() {
-                            var marcador;
-                            (function(geolocatingUser) {
-    						        navigator.geolocation.getCurrentPosition(function(position) {	
-    						            var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); 
-    				
-                                        if (marcador) {
-                                            marcador.setMap(geolocate);
-                                        }else {
-                                            marcador = new google.maps.Marker({
-                                            map: map,
-                                            position: geolocate });
-                                        }			            
-    						        });
-    						});
-                        });
-                 //Version inicial para menu
-                    $('#button-slide-menu-pint').stop().hide();
-                    $('#info-left-close').stop().hide();
-                    $('#info-left-close-second').stop().hide();
-                    $('#rangoLocalizacion').stop().hide();
-            //Abrimos el listado derecho y cambiamos el icono para activar una nueva funcionalidad
-                 $('#button-slide-menu').on("click", function (open) {
-                        open.preventDefault();
-                    $('#button-slide-menu').stop().hide();
-                    $('#button-slide-menu-pint').stop().show(); 
-                    $('#mySidenav').stop().animate({width: '50%', opacity: '1'});
-                    $('#container').stop().animate({opacity: '1',width: '50%'});
-                    setTimeout(function(){
-                        $('#info-left-close').stop().fadeIn(); 
-                    },300); 
-                    $('#right-second').stop().animate({width: '0'});
-                    $('#button-slide-menu').stop().hide();
-                    $('#button-slide-menu-pint').stop().show();
-                    $('#info-left-close-second').stop().hide();
-                    $('#rangoLocalizacion').stop().hide();
-                    $('#botInfW').stop().hide();
-                });
-            //Abrimos el pinterest style 
-                $('#button-slide-menu-pint').on("click", function (change) {
-                    change.preventDefault();
-                    $('#info-left-close').stop().hide();
-                    setTimeout(function(){
-                        $('#info-left-close-second').stop().fadeIn(); 
-                    },300); 
-                    $('#mySidenav').stop().animate({width: '0'});
-                    $('#right-second').stop().animate({width: '50%', opacity: '1'});
-                    $('#container').stop().animate({width: '50%'});
-                    $('#button-slide-menu-pint').stop().hide();
-                    $('#button-slide-menu').stop().show();
-                    $('#rangoLocalizacion').stop().show();
-                    $('#botInfW').stop().hide();
-                }); 
-            //Cerramos el listado derecho y cambiamos el icono para volver al origen
-                $('#info-left-close').stop().on("click", function (close) {
-                    close.preventDefault();
-                    $('#mySidenav').stop().animate({width: '0'});
-                    $('#button-slide-menu').stop().show();
-                    $('#button-slide-menu-pint').stop().hide();
-                    $('#info-left-close.second').stop().hide();
-                    $('#info-left-close').stop().hide();
-                    $('#container').stop().animate({width: '100%'});
-                    $('#botInfW').stop().show();
-                    $('.rectangle-bottom').stop().show();                    
-                });
-                $('#columns-pictures').stop().on("click", function (ouyhyea) {
-                    ouyhyea.preventDefault();
-                    $('#right-second').stop().animate({width: '0'});
-                    $('#button-slide-menu').stop().hide();
-                    $('#button-slide-menu-pint').stop().show();
-                    $('#info-left-close-second').stop().hide();
-                    $('#rangoLocalizacion').stop().hide();
-                    $('#container').stop().animate({width: '100%'});
-                    $('#botInfW').stop().show();
-                    $('.rectangle-bottom').stop().show();
-                });
-            //Cerramos el pinterest style
-                $('#info-left-close-second').stop().on("click", function (close2) {
-                    close2.preventDefault();
-                    $('#right-second').stop().animate({width: '0'});
-                    $('#button-slide-menu').stop().hide();
-                    $('#button-slide-menu-pint').stop().show();
-                    $('#info-left-close-second').stop().hide();
-                    $('#rangoLocalizacion').stop().hide();
-                    $('#container').stop().animate({width: '100%'});
-                    $('#botInfW').stop().show();
-                    $('.rectangle-bottom').stop().show();
-                });
-            //Cerramos side nav cuando map click
-            	
+                    menuInicial();
+                    clickTimeButton();
+                    closeRightIcon();
+                    closeColumns();
+                    closePintDesktop();
+                } 
             };
 
             <?php  } ?>
@@ -496,16 +514,23 @@
 
             for (var i = 0, len = total; i < len; i++) {
                 (function (i) {
+                        var id = results[i]["id"];
                         var result_id='result_'+ results[i]["id"];
                         var result_temp = document.getElementById(result_id);
                         result_temp.addEventListener ("click",function() {
-                            google.maps.event.trigger(getMarkers(results[i]["id"]), 'click');
+                           clickToMarker(id);
                         },false);                   
                 }(i));
             }
           }
 
     });
+
+    // The function to trigger the marker click, 'id' is the reference index to the 'markers' array.
+    function clickToMarker(id){
+        google.maps.event.trigger(locations[id].marker, 'click');
+        clickCloseTimeButton();
+    }
     
     </script>
     <div class="bottomInfoWindowDown" id="botInfW"> 
@@ -530,12 +555,12 @@
                     $nextSunday = date("y/m/d", strtotime("next sunday"));
 
                     foreach ($locations as $location) {
-                    	if ($location["pases"]){
-                       		foreach ($location["pases"] as $pase) {
-		                       $temp_date = date("y/m/d", strtotime(str_replace('/', '-', implode($pase))));
-		                       $temp_loc = $location;
-		                       $temp_loc ["pases"] = implode($pase);
-		                       if ($temp_date == $today) {
+                        if ($location["pases"]){
+                            foreach ($location["pases"] as $pase) {
+                               $temp_date = date("y/m/d", strtotime(str_replace('/', '-', implode($pase))));
+                               $temp_loc = $location;
+                               $temp_loc ["pases"] = implode($pase);
+                               if ($temp_date == $today) {
                                  $item = null;
                                  $i=0;
                                 foreach($today_events as $struct) {
@@ -547,11 +572,11 @@
                                 }
                                  if (!$item){
                                       $temp_loc ["pases"] = date("H:i", strtotime(str_replace('/', '-', implode($pase))));
-		                              $today_events[] = $temp_loc;
+                                      $today_events[] = $temp_loc;
                                  } else {
                                     $today_events[$i]["pases"] .= ", " . date("H:i", strtotime(str_replace('/', '-', implode($pase))));
                                  }
-		                       } else if (($temp_date<= $nextSunday) && ($temp_date>$today)) {
+                               } else if (($temp_date<= $nextSunday) && ($temp_date>$today)) {
                                     $item = null;
                                     $i=0;
                                     foreach($week_events as $struct) {
@@ -562,11 +587,11 @@
                                         $i++;
                                     }
                                     if (!$item){
-    	                                  $week_events[] = $temp_loc;
+                                          $week_events[] = $temp_loc;
                                     } else {
                                         $week_events[$i]["pases"] .= ", " . implode($pase);
                                     }
-		                       } else if ($temp_date > $nextSunday) {
+                               } else if ($temp_date > $nextSunday) {
                                     $item = null;
                                     $i=0;
                                     foreach($more_events as $struct) {
@@ -581,30 +606,47 @@
                                     } else {
                                         $more_events[$i]["pases"] .= ", " . implode($pase);
                                     }
-    	                      }
-	                     	}
+                              }
+                            }
                        }else {
-
+                            $temp_loc = $location;
+                            $temp_loc["fecha-inicio"]=strtotime(str_replace('/', '-', $temp_loc["fecha-inicio"]));
+                            $temp_loc["fecha-fin"]=strtotime(str_replace('/', '-', $temp_loc["fecha-fin"]));  
+                            $temp_loc ["pases"] = "Desde: ".date("d/m/y",$temp_loc["fecha-inicio"])."  Hasta: ".date("d/m/y",$temp_loc["fecha-fin"]);      
+                            if (date("y/m/d",$temp_loc["fecha-inicio"])>$today) {
+                                $temp_date = date("y/m/d",$temp_loc["fecha-inicio"]);
+                            } else {
+                                $temp_date = $today;
+                            }
+                            if ($temp_date == $today) {
+                                $today_events[] = $temp_loc;
+                            } else if (($temp_date<= $nextSunday) && ($temp_date>$today)) {
+                                $week_events[] = $temp_loc;
+                            } else if ($temp_date > $nextSunday) {
+                                $more_events[] = $temp_loc;
+                            }     
 
                        } 
                     }
 
                     foreach ($today_events as $location) {
-                        echo '<li><div id="dateside-'.$location["id"].'" style="white-space: normal">';
+                        echo '<li>';
+                        echo '<div class="map-button" id="map-button'.$location["id"].'" onclick="clickToMarker('.$location["id"].')"> Mapa'.'<i class="fa fa-globe" aria-hidden="true"></i>';
+                        echo '</div>';
+                        echo '<div id="dateside-'.$location["id"].'" style="white-space: normal" onclick="clickToMarker('.$location["id"].')">';
                         echo '<img class="image-right-info" src="'.$location["foto"].'"> </img>'; 
                         echo '<h3 class="titulo-right-info">'.substr($location["Titulo"],0,50)."...".'</h3>';
                         echo '<p>'.substr($location["contenido"],0,150).'</p>';
-                        echo '<p>'."Fechas:".''.$location["pases"].'</p>';
+                        echo '<p>'."Pases:".''.$location["pases"].'</p>';
                         echo '</div></li>';
-                    }
-                    
+                    }                 
                 ?>
             </ul>
             <h2 class="title-info"> ¡Eventos para esta semana! </h2>
             <ul>
                 <?php
                     foreach ($week_events as $location) {
-                        echo '<li><div id="dateside-'.$location["id"].'" style="white-space: normal">';
+                        echo '<li><div id="dateside-'.$location["id"].'" style="white-space: normal" onclick="clickToMarker('.$location["id"].')">';
                         echo '<img class="image-right-info" src="'.$location["foto"].'"> </img>'; 
                         echo '<h3 class="titulo-right-info">'.substr($location["Titulo"],0,50)."...".'</h3>';
                         echo '<p>'.substr($location["contenido"],0,150).'</p>';
@@ -618,7 +660,7 @@
             <ul>
                 <?php
                     foreach ($more_events as $location) {
-                        echo '<li><div id="dateside-'.$location["id"].'" style="white-space: normal">';
+                        echo '<li><div id="dateside-'.$location["id"].'" style="white-space: normal" onclick="clickToMarker('.$location["id"].')">';
                         echo '<img class="image-right-info" src="'.$location["foto"].'"> </img>'; 
                         echo '<h3 class="titulo-right-info">'.substr($location["Titulo"],0,50)."...".'</h3>';
                         echo '<p>'.substr($location["contenido"],0,150).'</p>';
@@ -631,13 +673,12 @@
     <!--Div con columnas de los eventos --> 
     <img id="info-left-close-second" style="right: 50%;position: absolute;z-index: 1;" src="/wp-content/themes/twentysixteen-child/cerrar.png"></img>
     <div id="right-second">
-    <img id="info-left-close-second-mobile" class="second-div-close" src="/wp-content/themes/twentysixteen-child/cross.png"></img>
+        <img id="info-left-close-second-mobile" class="second-div-close" src="/wp-content/themes/twentysixteen-child/cross.png"></img>
           <div id="container-columns"> 
-          	<div id="columns">
+            <div id="columns">
           </div> </div>
           <script type="text/javascript">
-                // Your code here.
-                    var loc = JSON.parse('<?php  echo json_encode($locations); ?>');
+                    var loc = <?php  echo json_encode($locations, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE); ?>;
                     var lat, long;
                       //Gets user current position automatically
                       navigator.geolocation.getCurrentPosition(function(position) {
@@ -659,7 +700,7 @@
                             for (i = 0; i < loc.length; i++) {
                             document.getElementById("columns").innerHTML += 
                                 '<figure>'+ 
-                                '<div class="map-button" id="map-button'+loc[i]["id"] +'"> Mapa' +
+                                '<div class="map-button" id="map-button'+loc[i]["id"] +'" onclick="clickToMarker('+loc[i]["id"] +')"> Mapa' +
                                 '<i class="fa fa-globe" aria-hidden="true"></i>' +
                                 '</div>' +
                                 '<div id="columns-pictures" style="background: url('+loc[i]["foto"]+')center no-repeat; background-size:cover;"> </div>'+
@@ -693,40 +734,8 @@
                           return dist / 0.017453292519943295 // (angle / 180) * Math.PI;
                         }            
             </script>
-            <script type="text/javascript">
-            var button_temp;
-            var i;
-            window.onload = function(){
-                if (loc){
-                    for (i = 0; i < loc.length; i++) {
-                        button_temp = document.getElementById("map-button"+loc[i]["id"]);
-                        console.log(button_temp);
-                        if (typeof window.addEventListener === 'function'){
-                            (function (button_temp,i) {
-                                button_temp.addEventListener('click', function(){
-                                    google.maps.event.trigger(getMarkers(i), 'click');
-                                    });
-                                })(button_temp,i);
-                            }
-                            $('.map-button').stop().on("click", function (close_almao) {
-                                close_almao.preventDefault();
-                                $('#right-second').stop().animate({width: '0'});
-                                $('#button-slide-menu').stop().hide();
-                                $('#button-slide-menu-pint').stop().show();
-                                $('#info-left-close-second').stop().hide();
-                                $('#rangoLocalizacion').stop().hide();
-                                $('#container').stop().animate({width: '100%'});
-                                $('#botInfW').stop().show();
-                                $('.rectangle-bottom').stop().show();
-                            });
-                    }
-
-                }
-                
-               } 
-            </script>
+            
         </div>         
-    <!-- BEGIN the party -->
 <div id="container">
     <div id="geolocating-container"> 
         <div id="geolocating"> <h4> Localizando</h4> </div>
@@ -739,49 +748,46 @@
                 </div>
             </div>
             <img class="rectangle-bottom" src="/wp-content/themes/twentysixteen-child/prueba2.png"></img>
-            <div id="button-geolocate">
+            <div id="button-geolocate" onclick="clickGeoButton()">
                 <span class="fa-stack fa-lg">
                   <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
-                  <i class="fa fa-location-arrow fa-stack-1x"></i>
+                  <img class="locationIconVector" src="http://i.imgur.com/oNQVu5b.png" />
+                  <!-- <i class="fa fa-location-arrow fa-stack-1x"></i>-->
                 </span>
             </div> 
-             <div id="button-slide-menu">
+             <div id="button-slide-menu" onclick="clickTimeButton()">
                 <span class="fa-stack fa-lg">
                   <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
                   <i class="fa fa-calendar fa-stack-1x"></i>
                 </span>
             </div>
-            <div id="button-slide-menu-pint">
+            <div class="tooltip">
+            <div id="button-slide-menu-pint" onclick="clickPintButton()">
+                <span class="tooltiptext hint" style="display: none">Aquí tienes las diferentes vistas de eventos con las que contamos </span>
                 <span class="fa-stack fa-lg">
                   <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
                   <i class="fa fa-th fa-stack-1x"></i>
                 </span>
+            </div>
             </div>
             <div class="se-pre-con classname">
                 <img class="rectangle-mid" src="/wp-content/themes/twentysixteen-child/prueba2.png"></img>
             </div>     
     </div>
     <div id="download-store-container"> 
-        <a href="https://itunes.apple.com/es/app/pequeagenda/id1181396255?mt=8"> <img class="appstore-logo" src="http://cclasarenas.com/wp-content/uploads/consiguelo-app-store.png" /> </a>
+        <a href="https://itunes.apple.com/es/app/pequeagenda/id1181396255?mt=8"> <img class="appstore-logo" src="wp-content/themes/twentysixteen-child/appstore.png" /> </a>
         <a href="https://play.google.com/store/apps/details?id=com.geotap.pequeagenda" > <img class="googleplay-logo" src="/wp-content/themes/twentysixteen-child/google.png" />  </a>
     </div> 
-    <img style="
-    right: 8px;
-    bottom: 72px;
-    position: absolute;
-    z-index: 1;
-    border-radius: 16%;
-    width: 30px;
-    height: 30px;
-    box-shadow: 0px 2px 2px 0.1px #8c8c8c;" class="logopequeagendabottom" src="/wp-content/themes/twentysixteen-child/vector.png"></img>
 <div id="map"> </div>
-    <!-- JQUERY -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <!-- apikey google maps -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANszbzxhpGtf3R30J0NG6FaSqKk_oOMis&callback=initMap"
         async defer> </script>
     <!-- font awesome icons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/wp-content/themes/twentysixteen-child/style.css" />
     <!--Script javascript -->
     <script src="/wp-content/themes/twentysixteen-child/javascript.js"></script>
+    <script src="/wp-content/themes/twentysixteen-child/js/first-visit.js"></script>
+
+

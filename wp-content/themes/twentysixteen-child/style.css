@@ -13,18 +13,55 @@
 .gm-style-cc {
     display: none;
 }
-.rotate{
+.rotate {
     -moz-transition: all 0.2s linear;
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
-        margin: -5px;
+    margin: -5px;
+}
+/* Tooltip*/
+.tooltip {
+    display: inline-block;
+    font-family: 'Roboto';
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 12px;
+    padding: 5px 0;
+    top: 100%;
+    left: 50%; 
+    margin-left: -60px; 
+    position: absolute;
+    z-index: 1;
+
+}
+.tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;  /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+
+.tooltip .tooltiptext {
+    visibility: visible;
 }
 
 #download-store-container {
     z-index: 999;
     position: absolute;
-    left:5px;
-    bottom:0;
+    left: 5px;
+    bottom: 0;
 }
 .googleplay-logo {
     width: 100px;
@@ -42,11 +79,10 @@
     position: absolute;
     z-index: 999;
 }
-
-.rotate.down{
-    -moz-transform:rotate(180deg);
-    -webkit-transform:rotate(180deg);
-    transform:rotate(180deg);
+.rotate.down {
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 #mySidenav {
     font-family: 'Roboto';
@@ -101,6 +137,7 @@ h4 {
     height: 1.2em;
     display: inline-block;
 } */
+
 #container {
     width: 100%;
     top: 0;
@@ -112,7 +149,7 @@ h4 {
     height: 100%;
 }
 .container-today {
-    margin-left:95px;
+    margin-left: 95px;
 }
 .sidenav {
     top: 0;
@@ -214,6 +251,7 @@ h4 {
     height: 1.2em;
     display: inline-block;
 } */
+
 #button-geolocate {
     z-index: 999 !important;
     text-shadow: 1px 1px 1px #ccc !important;
@@ -222,6 +260,14 @@ h4 {
     top: 10px;
     left: 375px;
     height: 42px !important;
+}
+.locationIconVector {
+    width: 31px;
+    left: 15%;
+    top: 10%;
+    margin: 0 auto;
+    cursor: pointer;
+    position: absolute;
 }
 #button-slide-menu {
     z-index: 999 !important;
@@ -312,14 +358,16 @@ h4 {
     background: #f6f6f6;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1), 0 2px 5px 0 transparent;
 }
-.titulo-right-info{
-        /* text-transform: uppercase; */
+.titulo-right-info {
+    /* text-transform: uppercase; */
+    
     font-size: 20px;
     margin: -5px;
     font-weight: 100;
     font-family: 'Amatic SC';
     background: #ebf0f4;
-}/*
+}
+/*
 #info-left-close-second {
     left: 51%;
     top: 2%;
@@ -341,6 +389,7 @@ h4 {
     height: 1em;
     display: inline-block;
 } */
+
 .fa-angle-down {
     left: 52px !important;
     color: #6a6a6a;
@@ -397,6 +446,7 @@ h4 {
 }
 .map-button:hover {
     opacity: 0.7;
+    display: inline;
     -moz-transition: all 0.5s ease 0s;
 }
 /*
@@ -438,6 +488,10 @@ div#columns figure img {
     display: block;
 }
 figure:hover .map-button {
+    display: block;
+    opacity: 1 !important;
+}
+li:hover .map-button {
     display: block;
     opacity: 1 !important;
 }
@@ -493,7 +547,7 @@ figcaption {
     font-size: 15px;
     font-family: 'Roboto', 'Arial', sans-serif;
     position: relative;
-    font-weight:100;
+    font-weight: 100;
     outline: 0px;
 }
 @-webkit-keyframes fadeInTop {
@@ -746,36 +800,40 @@ figcaption {
 /* media query for mobile in Potrait mode */
 
 @media only screen and (max-device-width: 460px) {
-    #info-left-close, #info-left-close-second {
+    #info-left-close,
+    #info-left-close-second {
         display: none;
     }
-.first-div-close {
-    right: 3px !important;
-    top: 25px;
-    margin: 2px;
-    /*
+    .first-div-close {
+        right: 3px !important;
+        top: 25px;
+        margin: 2px;
+        /*
     background-color: white;
     padding: 7px; 
     border-radius: 50%;*/
-    z-index: 999;
-    opacity: 1;
-    position: fixed;
-    height: 1.2em;
-    display: inline-block;
-}
-.second-div-close {
-    right: 3px !important;
-    top: 25px;
-    margin: 2px; /*
+        
+        z-index: 999;
+        opacity: 1;
+        position: fixed;
+        height: 1.2em;
+        display: inline-block;
+    }
+    .second-div-close {
+        right: 3px !important;
+        top: 25px;
+        margin: 2px;
+        /*
     background-color: white;
     padding: 7px;
     border-radius: 50%;*/
-    z-index: 999;
-    opacity: 1;
-    position: fixed;
-    height: 1.2em;
-    display: inline-block;
-}
+        
+        z-index: 999;
+        opacity: 1;
+        position: fixed;
+        height: 1.2em;
+        display: inline-block;
+    }
     .title-info {
         text-align: center;
         font-weight: bold;
@@ -812,7 +870,7 @@ figcaption {
         position: absolute !important;
         z-index: 100 !important;
         top: 13px !important;
-            left: 79%;
+        left: 79%;
         height: 42px !important;
     }
     #button-slide-menu-pint {
@@ -821,7 +879,7 @@ figcaption {
         position: absolute !important;
         z-index: 100 !important;
         top: 13px !important;
-            left: 79%;
+        left: 79%;
         height: 42px !important;
     }
     .sidenav {
@@ -1067,7 +1125,7 @@ figcaption {
         display: inline-block;
         position: fixed;
         top: 75px;
-        height:30px;
+        height: 30px;
         width: 155px;
         margin: 0 auto;
         left: 25%;
@@ -1103,11 +1161,13 @@ figcaption {
     }
     div#columns figure {
         background: #fefefe;
-        /* border: 2px solid #fcfcfc; */ 
+        /* border: 2px solid #fcfcfc; */
+        
         box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
         margin: 0 3% 15px;
         /* padding: 15px; */
-        /* padding-bottom: 10px; */ 
+        /* padding-bottom: 10px; */
+        
         border-radius: 5px;
         transition: opacity .4s ease-in-out;
         column-break-inside: avoid;
@@ -1128,11 +1188,11 @@ figcaption {
         display: block;
     }
     .googleplay-logo {
-    display: none;
-}
-.appstore-logo {
-    display: none;
-}
+        display: none;
+    }
+    .appstore-logo {
+        display: none;
+    }
     figure:hover .map-button {
         display: block;
         opacity: 1 !important;
